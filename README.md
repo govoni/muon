@@ -14,22 +14,22 @@
 
 ## the code
 
-  * ```OFOS_DetectorConstruction```: where the geometry of the detector is defined
+  * ```MUON_DetectorConstruction```: where the geometry of the detector is defined
     * remember: for each object one needs:
       * a solid = shape and size
       * a logical volume = solid + properties  (material, whether it's sensitive...)
       * a physical volume = location of the object
       * NB the physical volume is placed inside a logical volume somehow, 
            so it seems it's enough to replicate the most external one of them all
-  * ```OFOS_DetectorMessenger```: pass the infoes from the mac file to the Detector Construction
-  * ```OFOS_OpticalPhotonSD```: behaviour of the sensitive detectors in the geome
+  * ```MUON_DetectorMessenger```: pass the infoes from the mac file to the Detector Construction
+  * ```MUON_OpticalPhotonSD```: behaviour of the sensitive detectors in the geome
     * the single elements are identified by the copy number, I think
   * the simulation process is composed of a run of events, 
     which are processed in the following hierarchically organised actions:
-    * ```OFOS_RunAction```: Begin and end of the [run](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/BackupVersions/V10.4/html/Fundamentals/run.html)
-    * ```OFOS_EventAction```: Begin and end of an [event](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/BackupVersions/V10.4/html/Fundamentals/event.html)
-    * ```OFOS_TrackingAction```: Begin and end of [tracking](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/BackupVersions/V10.4/html/TrackingAndPhysics/tracking.html#access-to-track-and-step-information)
-    * ```OFOS_SteppingAction```: At each step in which the tracking process is divided
+    * ```MUON_RunAction```: Begin and end of the [run](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/BackupVersions/V10.4/html/Fundamentals/run.html)
+    * ```MUON_EventAction```: Begin and end of an [event](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/BackupVersions/V10.4/html/Fundamentals/event.html)
+    * ```MUON_TrackingAction```: Begin and end of [tracking](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/BackupVersions/V10.4/html/TrackingAndPhysics/tracking.html#access-to-track-and-step-information)
+    * ```MUON_SteppingAction```: At each step in which the tracking process is divided
 
 ## the geometry
 

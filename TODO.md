@@ -11,7 +11,7 @@
      * why is there only one single SiPM sensitive detector? 
        as there's only one logical volume for the SiPM
      * how do I separate the reading from different SiPM's? GetCopyNumber
-   * check what sensitive volumes are --> OFOS_OpticalPhotonSD
+   * check what sensitive volumes are --> MUON_OpticalPhotonSD
    * multithreading removed, that was not the problem though    
 
 
