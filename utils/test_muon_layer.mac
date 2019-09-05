@@ -1,0 +1,102 @@
+/run/initialize
+
+# general pieces of information
+# ---- ---- ---- ---- ---- ---- ---- ---- ---- 
+
+# - the detector is centered in (0,0,0), therefore particles have to start from outside it
+# - detector volume size:
+#   - the fibers generate grids in x and y, with the number of fibers in x and z being hardcoded, it seems
+#   - the total size of the geometry is dictated by the sensitive volume, plus vessel walls thickness 
+#     and some additional margins
+#   - the sensitive volume size is given by the fibres size and distance multiplied by the fibres number
+#   - volumes (matrioska) structure: LS C LS_vessel C buffer C outer_vessel C world 
+# - readout unit
+#   - fibre: core C inner_cladding C outer_cladding C(=) envelope C readout_unit 
+#   - SiPM: disc at the end of the fibre   
+
+# tutorial and documentation on visualisation:
+#   https://indico.cern.ch/event/294651/sessions/55918/attachments/552022/760637/Visualisation.pdf
+#   http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/ForApplicationDeveloper/html/Visualization/visdrivers.html
+
+# particles fired by the particle gun
+# ---- ---- ---- ---- ---- ---- ---- ---- ---- 
+
+
+# list of particles: http://fismed.ciemat.es/GAMOS/GAMOS_doc/GAMOS.5.1.0/x11519.html
+/gps/particle mu-
+/gps/direction 1 0 0    
+
+/gps/pos/type Point
+
+/gps/pos/centre 0.3 0.3 0.3 cm
+
+/gps/ene/type Mono
+/gps/ene/mono 10 GeV
+
+
+# properties of the materials in the detector
+# ---- ---- ---- ---- ---- ---- ---- ---- ---- 
+
+/MUON/ls/scattering 0.5 cm
+/MUON/ls/absorption 5.0 m
+# birks constant in mm/MeV
+/MUON/ls/birks 1e-9 
+/MUON/ls/density 0.9 
+/MUON/ls/loading_fraction 1e-2
+/MUON/ls/loading_material Pb
+
+# geometry of the detector
+# ---- ---- ---- ---- ---- ---- ---- ---- ---- 
+
+/MUON/geom/num_ru_x 200
+/MUON/geom/num_ru_y 200
+/MUON/geom/num_ru_z 2
+
+/MUON/geom/ru_xy_pitch 1.0 cm
+/MUON/geom/ru_xy_size  0.2 cm
+/MUON/geom/ru_xy_geom SingleFiber
+#/MUON/geom/ru_xy_geom Triangle
+#/MUON/geom/ru_xy_geom Square
+
+/MUON/geom/ru_z_geom SingleFiber
+/MUON/geom/ru_z_pitch 300 cm
+/MUON/geom/ru_z_size  0.2 cm
+
+/MUON/geom/fiber_radius 0.25 mm
+/MUON/geom/out_cladding_frac 0.03
+/MUON/geom/inn_cladding_frac 0.03
+
+
+#    MUON_OutputLog::log_cache << "Number of RU along X:                " <<  number_ru_x_ << G4endl;
+#    MUON_OutputLog::log_cache << "Number of RU along Y:                " <<  number_ru_y_ << G4endl;
+#    MUON_OutputLog::log_cache << "Number of RU along Z:                " <<  number_ru_z_ << G4endl;
+#    MUON_OutputLog::log_cache << "Distance among RU on XY plane:       " <<  vert_ru_distance_/mm << " mm" << G4endl;
+#    MUON_OutputLog::log_cache << "Size of a RU on the XY plane:        " <<  vert_ru_size_/mm << " mm" << G4endl;
+#    MUON_OutputLog::log_cache << "Distance among RU along Z direction: " <<  hori_ru_distance_/mm  << " mm" << G4endl;
+#    MUON_OutputLog::log_cache << "Size of a RU along Z direction:      " <<  hori_ru_size_/mm << " mm" << G4endl; 
+#
+#    MUON_OutputLog::log_cache << "Fiber Radius:                        " <<  fiber_radius_/mm << " mm" << G4endl;
+#    MUON_OutputLog::log_cache << "Fraction of Outer Cladding:          " <<  outer_cladding_fractional_radius_ << G4endl;
+#    MUON_OutputLog::log_cache << "Fraction of Inner Cladding:          " <<  inner_cladding_fractional_radius_ << G4endl;
+
+
+# building of the detector
+# ---- ---- ---- ---- ---- ---- ---- ---- ---- 
+
+/MUON/detector/build
+
+
+# visualisation, so far a failure
+# ---- ---- ---- ---- ---- ---- ---- ---- ---- 
+
+/vis/open HepRepFile
+/vis/viewer/set/background white
+/vis/viewer/flush
+
+
+# run the generation of events with N particles (true?)
+# ---- ---- ---- ---- ---- ---- ---- ---- ---- 
+
+# /run/beamOn 10
+
+

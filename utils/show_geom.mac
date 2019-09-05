@@ -1,0 +1,37 @@
+/run/initialize
+
+/gps/particle e-
+/gps/direction 1 0 0    
+
+/gps/pos/type Point
+
+/gps/pos/centre 0 0 0 cm
+
+/gps/ene/type Mono
+/gps/ene/mono 2.8 MeV
+
+/MUON/ls/scattering 0.5 cm
+/MUON/ls/absorption 5.0 m
+/MUON/ls/deploy_properties
+
+/MUON/geom/num_ru_x 15
+/MUON/geom/num_ru_y 25
+/MUON/geom/num_ru_z 10
+
+/MUON/geom/ru_xy_pitch 1.0 cm
+/MUON/geom/ru_xy_size  0.2 cm
+/MUON/geom/ru_xy_geom SingleFiber
+#/MUON/geom/ru_xy_geom Triangle
+#/MUON/geom/ru_xy_geom Square
+
+/MUON/geom/ru_z_geom SingleFiber
+/MUON/geom/ru_z_pitch 100 cm
+/MUON/geom/ru_z_size  0.2 cm
+
+/MUON/geom/fiber_radius 0.25 mm
+/MUON/geom/out_cladding_frac 0.03
+/MUON/geom/inn_cladding_frac 0.03
+
+/MUON/geom/build
+
+#/run/beamOn 1

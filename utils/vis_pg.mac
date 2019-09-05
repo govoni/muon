@@ -1,0 +1,30 @@
+# /vis/open HepRepFile
+/vis/open OGL 600x600-0+0
+# Use this open statement to create an OpenInventor view:
+
+# Candidates are: ATree DAWNFILE HepRepFile HepRepXML OGL OGLI OGLIQt OGLIX OGLIXm OGLS OGLSQt OGLSX OGLSXm RayTracer RayTracerX VRML1FILE VRML2FILE gMocrenFile
+
+# ASCIITree (ATree)
+# DAWNFILE (DAWNFILE)
+# G4HepRep (HepRepXML)
+# G4HepRepFile (HepRepFile)
+# RayTracer (RayTracer)
+# VRML1FILE (VRML1FILE)
+# VRML2FILE (VRML2FILE)
+# gMocrenFile (gMocrenFile)
+# OpenGLImmediateQt (OGLIQt, OGLI)
+# OpenGLStoredQt (OGLSQt, OGL, OGLS)
+# OpenGLImmediateXm (OGLIXm, OGLIQt_FALLBACK)
+# OpenGLStoredXm (OGLSXm, OGLSQt_FALLBACK)
+# OpenGLImmediateX (OGLIX, OGLIQt_FALLBACK, OGLIXm_FALLBACK)
+# OpenGLStoredX (OGLSX, OGLSQt_FALLBACK, OGLSXm_FALLBACK)
+# RayTracerX (RayTracerX)
+
+
+# /vis/open G4HepRepFile
+
+# /vis/open OIX
+
+/run/initialize
+/vis/drawVolume
+/vis/viewer/set/background white

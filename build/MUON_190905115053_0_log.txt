@@ -1,0 +1,31 @@
+MUON_DetectorConstruction::MUON_DetectorConstruction ()
+***************************************
+*   DEFAULT GEOMETRY IMPLEMENTATION   *
+***************************************
+MUON_DetectorConstruction::Construct ()
+LS PROPERTIES (external input)
+Cocktail Name:                       LAB
+LS Density:                          0
+LS Loading Fraction:                 0
+LS Loading Material:                 
+---------------------------------------
+MUON_DetectorConstruction::build_geom ()
+
+***    geometry input parameters    ***
+Distance between fibres in a plane:  100 mm
+scintillator slab depth:             100 mm
+Fiber Radius:                        0.25 mm
+Fraction of Outer Cladding:          0.03
+Fraction of Inner Cladding:          0.03
+---------------------------------------
+***       sensitive detectors       ***
+MUON/HoriSiPmtSD id: 4  collection: SiPmtHitsCollection
+MUON/HoriFiberSD id: 2  collection: FiberHitsCollection
+
+***************************************
+*        BEGIN OF RUN ACTION          *
+***************************************
+LS Material: LAB
+Density:                             859 mg/cm3
+Rad length:                          51.7063 cm 
+Critical Energy (Rossi):             98.9916 MeV
