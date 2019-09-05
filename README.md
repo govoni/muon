@@ -4,6 +4,8 @@
 
   * to source a complete LCG environment:
      ```source /cvmfs/sft.cern.ch/lcg/views/setupViews.sh LCG_96 x86_64-centos7-gcc8-opt```
+    * now implemented in ```setup_lxplus.sh```, where if any additional argument is given 
+      the version with debugging info is linked (```source setup_lxplus.sh 1```)
   * original simulation code of LiquidO is [here](https://svn.in2p3.fr/liquido/SW/trunk/simulation/)
   * to have the mac working, always use ```ssh -Y``` and, on your mac, 
     enable “indirect GL” in XQuartz, with the command
@@ -40,3 +42,4 @@
   * each fibre is composed of an outer cladding (fiber_outer_cladding_l), inner cladding (fiber_inner_cladding_l), and core (fiber_core_l)
   * each SiPM is composed of an overall volume (ru_sipmt_l) and a sensitive volume (ru_sipmt_sens_l)
   * there's a SiPM on each side of each fibre (ru_sipmt_top_p, ru_sipmt_bot_p)
+

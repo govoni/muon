@@ -35,32 +35,32 @@ public:
     void set_gen_proc     (G4int value)        { gen_proc_    = value; };
     void set_time         (G4double value)     { time_        = value; };
     void set_wavelength   (G4double value)     { wavelength_  = value; };
-    void set_position     (G4ThreeVector pos) { position_    = pos; };
-    void set_polarization (G4ThreeVector pol) { polarization_= pol; };
+    void set_position     (G4ThreeVector pos)  { position_    = pos; };
+    void set_polarization (G4ThreeVector pol)  { polarization_= pol; };
     
     // Get methods
-    G4int    get_track_id         () const {return track_id_    ;} ;
-    G4int    get_sd_type          () const {return type_        ;} ;
-    G4int    get_primary_id       () const {return primary_id_  ;} ;
-    G4int    get_secondary_id     () const {return secondary_id_;} ;
-    G4int    get_gen_proc         () const {return gen_proc_    ;} ;
-    G4double get_time             () const {return time_        ;} ;
-    G4double get_wavelength       () const {return wavelength_  ;} ;
+    G4int    get_track_id     () const {return track_id_    ;} ;
+    G4int    get_sd_type      () const {return type_        ;} ;
+    G4int    get_primary_id   () const {return primary_id_  ;} ;
+    G4int    get_secondary_id () const {return secondary_id_;} ;
+    G4int    get_gen_proc     () const {return gen_proc_    ;} ;
+    G4double get_time         () const {return time_        ;} ;
+    G4double get_wavelength   () const {return wavelength_  ;} ;
     const G4ThreeVector &get_position    () const {return position_    ;} ;
     const G4ThreeVector &get_polarization() const {return polarization_;} ;
 
 
 private:
     
-    G4int         track_id_    ;
-    G4int         type_        ;
-    G4int         primary_id_  ;
-    G4int         secondary_id_;
-    G4int         gen_proc_;
-    G4double      time_        ;
-    G4double      wavelength_;
-    G4ThreeVector position_;
-    G4ThreeVector polarization_;
+    G4int         track_id_ ;
+    G4int         type_ ;
+    G4int         primary_id_ ;
+    G4int         secondary_id_ ;
+    G4int         gen_proc_ ;
+    G4double      time_ ;
+    G4double      wavelength_ ;
+    G4ThreeVector position_ ;
+    G4ThreeVector polarization_ ;
 
 };
 

@@ -35,7 +35,6 @@ MUON_EventAction::MUON_EventAction() : G4UserEventAction(),
 
 
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- 
-// ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- 
  
 
 MUON_EventAction::~MUON_EventAction ()
@@ -95,7 +94,7 @@ MUON_EventAction::fetch_event_info (const G4Event* evt)
  
 
 G4int 
-MUON_EventAction::process_hit_collections ( const G4Event* evt )
+MUON_EventAction::process_hit_collections (const G4Event* evt)
 {
   cout << "DEBUG[MUON_EventAction][process_hit_collections]" << endl ;
   if ( MUON_Verbosity::level>1) 
@@ -107,8 +106,6 @@ MUON_EventAction::process_hit_collections ( const G4Event* evt )
   const int n_collections = 2 ;
 
   vector<MUON_OPHitCollection *> collection_container (2, 0) ;
-//  MUON_OPHitCollection * collection_container[n_collections] ;
-
 
   /// fetch hit collections 
   collection_container[0] = (MUON_OPHitCollection*) (HCofEvent->GetHC (fiber_hit_collection_id_)) ;
@@ -129,15 +126,12 @@ MUON_EventAction::process_hit_collections ( const G4Event* evt )
 
   for (int iC = 0 ; iC < n_collections ; ++iC)
   {
-//      int n_hits = collection_container[iC]->entries();
       int n_hits = collection_container.at (iC)->entries () ;
 
-      for(int iH = 0; iH < n_hits; ++iH)
+      for (int iH = 0; iH < n_hits; ++iH)
       {
-//          a_hit = (*(collection_container[iC]))[iH];
           a_hit = (*(collection_container.at (iC)))[iH] ;
           global_ntuples_ptr->fill_hit (a_hit) ;
-
       }
   }
   return n_tot_hits;
