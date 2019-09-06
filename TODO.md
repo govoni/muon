@@ -42,6 +42,7 @@
     * ID the info to be saved from the SiPM
       * for optical photons
       * for other particles  
-  * FIXME manca la funzione clear nell'ntupla??         
+  * come determino il numero di identificazione di ogni SiPM?
+  * l'efficienza di rivelazione del SiPM e' codificata?
 
 
