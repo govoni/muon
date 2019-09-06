@@ -20,11 +20,28 @@
 
 ## on the detector info extraction
 
+  * on the detector types
+    * Undefined=0, VerticalFiber=1, HorizontalFiber=2, Fiber=3, Pmt=4, Vessel=8
+    * this is chosen in MUON_DetectorConstruction::ConstructSDandField (),
+      for the time being classified as fibres, simply.
+    * Q: do we want to have two separate detectors, to account for possible interactions
+         of other particles than optical photons, in the SiPM or in the fibres? 
   * check how SiPmtHitsCollection is used in the code
      sipmt_SD_ = new MUON_OpticalPhotonSD (sipmt_SDname, "SiPmtHitsCollection", SDType::Pmt) ;
      --> becomes sipmt_hit_collection_id_ in the EventAction
      --> function EventAction::process_hit_collections
      --> hits are saved as objects of the MUON_OPHit class, where OP stays for OpticalPhoton
-       
+  * on the expected interaction, i.e. what should be saved
+    * in the fibres
+      * it's just propagation, so this is basically a counting of photons
+    * in the SiPM
+      * here it's energy deposition with a given efficiency
+        * that I may parameterise afterwards?
+        * is it considered already?
+  * define in the stepping action what needs to be saved
+    * ID the info to be saved from the SiPM
+      * for optical photons
+      * for other particles  
+  * FIXME manca la funzione clear nell'ntupla??         
 
 

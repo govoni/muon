@@ -305,8 +305,10 @@ MUON_DetectorConstruction::ConstructSDandField ()
     MUON_OutputLog::log_cache << "***       sensitive detectors       ***" << G4endl ;
 
     //PG these two are then looked for in MUON_EventAtion
+    //PG for the time being fibres are classified as Fibres generically,
+    //PG not split into horizontal or vertical ones
     sipmt_SD_ = new MUON_OpticalPhotonSD (sipmt_SDname, "SiPmtHitsCollection", SDType::Pmt) ;
-    fiber_SD_ = new MUON_OpticalPhotonSD (fiber_SDname, "FiberHitsCollection", SDType::HorizontalFiber) ;
+    fiber_SD_ = new MUON_OpticalPhotonSD (fiber_SDname, "FiberHitsCollection", SDType::Fiber) ;
 
     /// new since Geant4 v10.3
     G4SDManager::GetSDMpointer ()->AddNewDetector (sipmt_SD_) ;

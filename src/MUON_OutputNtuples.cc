@@ -137,10 +137,10 @@ bool
 MUON_OutputNtuples::fill_interaction (int track_id, int parent_id, int interaction_id, int particle,  const G4ThreeVector &pos, float dE, float time ) 
 {
     if (n_interactions_ == n_max_interactions_)
-    {
+      {
         is_ni_overflow_ = true ;
         return false ;
-    }
+      }
 
     t_id_.at (n_interactions_)       = track_id ;
     i_id_.at (n_interactions_)       = interaction_id ;
@@ -152,7 +152,7 @@ MUON_OutputNtuples::fill_interaction (int track_id, int parent_id, int interacti
     i_dE_.at (n_interactions_)       = dE / MeV ;
     i_time_.at (n_interactions_)     = time / ns ; 
 
-    n_interactions_++ ;
+    ++n_interactions_ ;
 
     return true ;
 }
@@ -184,7 +184,7 @@ MUON_OutputNtuples::fill_hit (const MUON_OPHit *a_hit )
     h_pol_y_.at (n_hits_)        = static_cast<float> (a_hit->get_polarization ().y ()) ;
     h_pol_z_.at (n_hits_)        = static_cast<float> (a_hit->get_polarization ().z ()) ;
 
-    n_hits_++ ;
+    ++n_hits_ ;
 
     return true ;
 }
@@ -216,7 +216,7 @@ MUON_OutputNtuples::fill_all_branches (double value )
     h_pol_y_.at (n_hits_)        = static_cast<float> (value) ;
     h_pol_z_.at (n_hits_)        = static_cast<float> (value) ;
 
-    n_hits_++ ;
+    ++n_hits_ ;
 
     return true ;
 }

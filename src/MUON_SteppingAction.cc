@@ -114,7 +114,7 @@ void MUON_SteppingAction::UserSteppingAction (const G4Step* theStep)
 
   /// Scintillation and Cherenkov are processes which do not play a role
   /// in defining the step length (no max number of photons specified)
-  /// in the physics list. As a consequence they cannot be fetched trhough
+  /// in the physics list. As a consequence they cannot be fetched through
   /// the post point and must be retrieved from the vector of postStep
   /// processes
   size_t MAXofPostStepLoops  = fpSteppingManager->GetMAXofPostStepLoops () ; 

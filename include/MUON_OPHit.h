@@ -46,8 +46,8 @@ public:
     G4int    get_gen_proc     () const {return gen_proc_    ;} ;
     G4double get_time         () const {return time_        ;} ;
     G4double get_wavelength   () const {return wavelength_  ;} ;
-    const G4ThreeVector &get_position    () const {return position_    ;} ;
-    const G4ThreeVector &get_polarization() const {return polarization_;} ;
+    const G4ThreeVector &get_position     () const {return position_    ;} ;
+    const G4ThreeVector &get_polarization () const {return polarization_;} ;
 
 
 private:
