@@ -26,7 +26,8 @@
 #include "TROOT.h"
 
 using namespace std ;
-MUON_OutputNtuples * global_ntuples_ptr ;
+MUON_OutputNtuples      * global_ntuples_ptr ;
+MUON_OutputNtuplesLight * global_ntuples_light_ptr ;
 
 int main (int argc, char ** argv)
 {
@@ -35,6 +36,7 @@ int main (int argc, char ** argv)
 
   MUON_Verbosity::level = 1 ;
   global_ntuples_ptr = 0 ;
+  global_ntuples_light_ptr = 0 ;
 
   G4UIExecutive * ui = 0 ;
   if (argc == 1) {

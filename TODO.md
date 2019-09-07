@@ -16,6 +16,7 @@
     * add a condensed info:
       * the (x,y) coordinate of the MCtruth particles 
       * the signal at the SiPM, for each event
+  * what is ComputeCriticalEnergy?    
 
 
 ## on the detector info extraction
@@ -45,4 +46,9 @@
   * come determino il numero di identificazione di ogni SiPM?
   * l'efficienza di rivelazione del SiPM e' codificata?
 
+## primary particle information
 
+  * how can I get its initial position and energy?
+  * how can I determine the total energy loss of a particle, after it exits the detector?
+
+ 

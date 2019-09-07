@@ -27,7 +27,7 @@ MUON_EventAction::MUON_EventAction() : G4UserEventAction(),
                                        fiber_hit_collection_id_ (-1),
                                        sipmt_hit_collection_id_ (-1)
 {
-  cout << "DEBUG[MUON_EventAction][ctor]" << endl ;
+  //cout << "DEBUG[MUON_EventAction][ctor]" << endl ;
   if (MUON_Verbosity::level > 1) 
     G4cout << "MUON_EventAction()" << G4endl ;
 
@@ -39,7 +39,7 @@ MUON_EventAction::MUON_EventAction() : G4UserEventAction(),
 
 MUON_EventAction::~MUON_EventAction ()
 {
-  cout << "DEBUG[MUON_EventAction][dtor]" << endl ;
+  //cout << "DEBUG[MUON_EventAction][dtor]" << endl ;
   if (MUON_Verbosity::level>1) 
     G4cout << "~MUON_EventAction()" << G4endl ;
 }
@@ -48,11 +48,13 @@ MUON_EventAction::~MUON_EventAction ()
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- 
  
 
-void MUON_EventAction::BeginOfEventAction (const G4Event*)
+void MUON_EventAction::BeginOfEventAction (const G4Event* event)
 {
-  cout << "DEBUG[MUON_EventAction][BeginOfEventAction]" << endl ;
+  //cout << "DEBUG[MUON_EventAction][BeginOfEventAction]" << endl ;
   if ( MUON_Verbosity::level>1) 
       G4cout << "Begin of Event Action" << G4endl ;
+
+
 }
 
 
@@ -62,20 +64,39 @@ void MUON_EventAction::BeginOfEventAction (const G4Event*)
 void 
 MUON_EventAction::EndOfEventAction (const G4Event* event)
 {
-    cout << "DEBUG[MUON_EventAction][EndOfEventAction]" << endl ;
+    //cout << "DEBUG[MUON_EventAction][EndOfEventAction]" << endl ;
     G4int eventID = event->GetEventID();
 
   //if( eventID < 100 || eventID%100 == 0) 
   if ( MUON_Verbosity::level>1) 
       G4cout << "EndOfEventAction  ev:" << eventID << G4endl;
 
+/*
+  //PG removing sensitive detectors by now, 
+  //PG and filling ntuples directly in the SteppingAction
+
   /// fetch collection IDs
   if ( fiber_hit_collection_id_ == -1 ) fiber_hit_collection_id_ = G4SDManager::GetSDMpointer ()->GetCollectionID ("FiberHitsCollection") ;
   if ( sipmt_hit_collection_id_ == -1 ) sipmt_hit_collection_id_ = G4SDManager::GetSDMpointer ()->GetCollectionID ("SiPmtHitsCollection") ;
 
   process_hit_collections (event) ;
-  fetch_event_info (event) ;
-//  global_ntuples_ptr->store_event () ;
+*/
+//  fetch_event_info (event) ;
+
+  //PG info on the input particles
+  global_ntuples_light_ptr->fill_bullet (
+      event->GetPrimaryVertex ()->GetX0 () / cm                         ,
+      event->GetPrimaryVertex ()->GetY0 () / cm                         ,
+      event->GetPrimaryVertex ()->GetZ0 () / cm                         ,
+//      event->GetPrimaryVertex ()->GetPrimary ()->GetPx () / GeV         ,   
+//      event->GetPrimaryVertex ()->GetPrimary ()->GetPy () / GeV         ,   
+//      event->GetPrimaryVertex ()->GetPrimary ()->GetPz () / GeV         ,   
+      event->GetPrimaryVertex ()->GetPrimary ()->GetTotalEnergy () / GeV,            
+      event->GetPrimaryVertex ()->GetPrimary ()->GetPDGcode ()                  
+    ) ;
+
+  global_ntuples_light_ptr->store_event () ;
+
 }
 
 
@@ -96,7 +117,7 @@ MUON_EventAction::fetch_event_info (const G4Event* evt)
 G4int 
 MUON_EventAction::process_hit_collections (const G4Event* evt)
 {
-  cout << "DEBUG[MUON_EventAction][process_hit_collections]" << endl ;
+  //cout << "DEBUG[MUON_EventAction][process_hit_collections]" << endl ;
   if ( MUON_Verbosity::level>1) 
       G4cout << "EventAction::process_hit_collections()" << G4endl ;
 

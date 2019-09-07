@@ -59,6 +59,9 @@ MUON_SteppingAction::~MUON_SteppingAction ()
 void MUON_SteppingAction::UserSteppingAction (const G4Step* theStep)
 {
 //  cout << "DEBUG[MUON_SteppingAction][UserSteppingAction]" << endl ;
+/*
+https://github.com/govoni/FibresCalo/blob/master/src/SteppingAction.cc
+*/
 
   G4Track * theTrack = theStep->GetTrack () ;
 
@@ -101,11 +104,68 @@ void MUON_SteppingAction::UserSteppingAction (const G4Step* theStep)
 
   if (thePostPoint)
     {
-//      cout << "[DEBUG][MUON_SteppingAction] line 86 var before " << thePostPVname << endl ;
-//      cout << "[DEBUG][MUON_SteppingAction] line 86 outcome of the GetName: " << thePostPV->GetName () << endl ;
       thePostPVname = thePostPV->GetName () ;
     }
 
+  //PG working here to put stuff in
+  //PG ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- 
+  
+  G4VSensitiveDetector * thisSD = thePostPoint->GetSensitiveDetector () ;
+  G4int sd_type = -9 ; 
+  if (thisSD)
+    {
+      sd_type = static_cast<G4int> ( dynamic_cast<MUON_OpticalPhotonSD*> (thisSD)->get_sd_type () ) ;
+    }
+  else
+    {
+//      cout << "no sensitive volume crossed " << thePrePVname << endl ;
+      return ;
+    }  
+
+  // nella stragrande maggioranza degli eventi, nessun SiPM si accende, 
+  // sparando positroni su un lato del detector
+  // - TODO test con il coso online provando a spararne uno dal centro, per vedere che sia OK la posizione 
+  // - TODO aggiungi un altro if con una fibra, qui sotto  
+
+  //the crossed volume is a SiPM
+  if (thePrePVname.contains ("SiPMT"))
+    {
+      cout << "[MUON_SteppingAction][UserSteppingAction] SiPM " << sd_type << endl ;
+      cout << "[MUON_SteppingAction][UserSteppingAction] SiPM number: " << thePrePV->GetCopyNo () << endl ;
+      G4double energy = theStep->GetTotalEnergyDeposit () ; 
+        //- theStep->GetNonIonizingEnergyDeposit () ;
+  
+    } //the crossed volume is a SiPM
+  
+  /// track energy loss by primary particle
+  if (theTrack->GetTrackID () == 1)
+    {
+      G4double energy = theStep->GetTotalEnergyDeposit () ; 
+      /* still not clear to me how to know the energy a single particle lost in a step.
+        - there is the energy lost to the material (GetTotalEnergyDeposit)
+        - there is the energy lost to secondary particles (how do I calculate it?)
+       http://hypernews.slac.stanford.edu/HyperNews/geant4/get/eventtrackmanage/1043/1/1.html
+       http://hypernews.slac.stanford.edu/HyperNews/geant4/get/eventtrackmanage/1287/1.html
+      */
+    }
+
+
+
+ /* 
+  
+  /// Check if a sensitive detector is being crossed
+  G4VSensitiveDetector * thisSD = thePostPoint->GetSensitiveDetector () ;
+  G4int sd_type = -9 ; 
+  if (thisSD)
+    sd_type = static_cast<G4int> ( dynamic_cast<MUON_OpticalPhotonSD*> (thisSD)->get_sd_type () ) ;
+  
+      G4double energy = theStep->GetTotalEnergyDeposit() - theStep->GetNonIonizingEnergyDeposit();
+  
+  
+  //if( (theTrack->GetLogicalVolumeAtVertex()->GetName().contains("fibre"))
+*/
+
+/*
   /// Steps with status fAtRestDoItProc have zero length
   /// and zero depoited energy. Not clear  how to used them.
   /// In this simulation an example is Scintillation with
@@ -416,6 +476,6 @@ void MUON_SteppingAction::UserSteppingAction (const G4Step* theStep)
 //  G4double x = theTrack->GetVertexPosition ().x () ;
 //  G4double y = theTrack->GetVertexPosition ().y () ;
 //  G4double z = theTrack->GetVertexPosition ().z () ;
-
+*/
   return ;
 }

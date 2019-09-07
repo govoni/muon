@@ -297,31 +297,36 @@ void MUON_DetectorConstruction::define_materials ()
 void 
 MUON_DetectorConstruction::ConstructSDandField ()
 {
+/*
+  //PG removing sensitive detectors by now, 
+  //PG and filling ntuples directly in the SteppingAction
+
   // Sensitive detectors 
-    G4String sipmt_SDname  = "MUON/HoriSiPmtSD" ;
-    G4String fiber_SDname  = "MUON/HoriFiberSD" ;
+  G4String sipmt_SDname  = "MUON/HoriSiPmtSD" ;
+  G4String fiber_SDname  = "MUON/HoriFiberSD" ;
 
-    MUON_OutputLog::log_cache << "---------------------------------------" << G4endl ;
-    MUON_OutputLog::log_cache << "***       sensitive detectors       ***" << G4endl ;
+  MUON_OutputLog::log_cache << "---------------------------------------" << G4endl ;
+  MUON_OutputLog::log_cache << "***       sensitive detectors       ***" << G4endl ;
 
-    //PG these two are then looked for in MUON_EventAtion
-    //PG for the time being fibres are classified as Fibres generically,
-    //PG not split into horizontal or vertical ones
-    sipmt_SD_ = new MUON_OpticalPhotonSD (sipmt_SDname, "SiPmtHitsCollection", SDType::Pmt) ;
-    fiber_SD_ = new MUON_OpticalPhotonSD (fiber_SDname, "FiberHitsCollection", SDType::Fiber) ;
+  //PG these two are then looked for in MUON_EventAtion
+  //PG for the time being fibres are classified as Fibres generically,
+  //PG not split into horizontal or vertical ones
+  sipmt_SD_ = new MUON_OpticalPhotonSD (sipmt_SDname, "SiPmtHitsCollection", SDType::Pmt) ;
+  fiber_SD_ = new MUON_OpticalPhotonSD (fiber_SDname, "FiberHitsCollection", SDType::Fiber) ;
 
-    /// new since Geant4 v10.3
-    G4SDManager::GetSDMpointer ()->AddNewDetector (sipmt_SD_) ;
-    G4SDManager::GetSDMpointer ()->AddNewDetector (fiber_SD_) ;
-    
-    if (is_geom_built)
-     {
-         if (MUON_Verbosity::level>1)
-             MUON_OutputLog::log_cache  << "MUON_DetectorConstruction::ConstructSDandField () :: Setting Sensitive Detectors" << G4endl ;
-   
-        SetSensitiveDetector (logic_ru_sipmt_, sipmt_SD_) ;
-        SetSensitiveDetector (logic_fiber_,    fiber_SD_) ;
-    }
+  /// new since Geant4 v10.3
+  G4SDManager::GetSDMpointer ()->AddNewDetector (sipmt_SD_) ;
+  G4SDManager::GetSDMpointer ()->AddNewDetector (fiber_SD_) ;
+  
+  if (is_geom_built)
+   {
+       if (MUON_Verbosity::level>1)
+           MUON_OutputLog::log_cache  << "MUON_DetectorConstruction::ConstructSDandField () :: Setting Sensitive Detectors" << G4endl ;
+ 
+      SetSensitiveDetector (logic_ru_sipmt_, sipmt_SD_) ;
+      SetSensitiveDetector (logic_fiber_,    fiber_SD_) ;
+  }
+*/  
 }
 
 
@@ -576,33 +581,33 @@ MUON_DetectorConstruction::build_geom ()
 
   // Fiber Envelope
   G4Tubs          * fiber_env_s = new G4Tubs ("fiber_env_s", 0., fiber_radius_, 0.5 * fiber_env_length, 0*deg, 360*deg) ;
-  G4LogicalVolume * fiber_env_l = new G4LogicalVolume (fiber_env_s, out_cladding_mat, "Horizontal Fiber Envelope") ;
+  G4LogicalVolume * fiber_env_l = new G4LogicalVolume (fiber_env_s, out_cladding_mat, "Fiber Envelope") ;
   //PG                                                    pSolid,           pMaterial,           name
 
   // Fiber outer cladding
   G4Tubs          * fiber_outer_cladding_s   = new G4Tubs ("fiber_outer_cladding_s", 0. , fiber_radius_, 0.5 * fiber_length, 0*deg, 360*deg) ;
-  G4LogicalVolume * fiber_outer_cladding_l   = new G4LogicalVolume (fiber_outer_cladding_s, out_cladding_mat, "Horizontal Fiber Outer Cladding") ;
+  G4LogicalVolume * fiber_outer_cladding_l   = new G4LogicalVolume (fiber_outer_cladding_s, out_cladding_mat, "Fiber Outer Cladding") ;
   //PG why doesn't this end at the inner cladding radius? FIXME
 
   // Fiber inner cladding
   G4Tubs          * fiber_inner_cladding_s   = new G4Tubs ("fiber_inner_cladding_s", 0. , 
                                                     (1.-outer_cladding_fractional_radius_) * fiber_radius_, 0.5 * fiber_length, 0*deg, 360*deg) ;
-  G4LogicalVolume * fiber_inner_cladding_l   = new G4LogicalVolume (fiber_inner_cladding_s, polymethylmethacrylate, "Horizontal Fiber Inner Cladding") ;
+  G4LogicalVolume * fiber_inner_cladding_l   = new G4LogicalVolume (fiber_inner_cladding_s, polymethylmethacrylate, "Fiber Inner Cladding") ;
   //PG why doesn't this end at the core radius? FIXME
 
   //  Fiber Core
   G4Tubs          * fiber_core_s   = new G4Tubs ("fiber_core_s", 0.,
                                                 (1.-outer_cladding_fractional_radius_-inner_cladding_fractional_radius_) * fiber_radius_, 
                                                   0.5 * fiber_length, 0*deg, 360*deg) ;
-  G4LogicalVolume * fiber_core_l  = new G4LogicalVolume (fiber_core_s, polystyrene, "Horizontal Fiber Core") ;
+  G4LogicalVolume * fiber_core_l  = new G4LogicalVolume (fiber_core_s, polystyrene, "Fiber Core") ;
 
   // SiPMT
   G4Tubs            * ru_sipmt_s = new G4Tubs ("ru_sipmt_s", 0., sipmt_radius, 0.5 * sipm_thickness, 0*deg, 360*deg) ;
-  G4LogicalVolume   * ru_sipmt_l = new G4LogicalVolume (ru_sipmt_s, black_acrylic, "Horizontal RU SiPMT") ;
+  G4LogicalVolume   * ru_sipmt_l = new G4LogicalVolume (ru_sipmt_s, black_acrylic, "RU SiPMT") ;
 
   // SiPMT Sensitive Volume
   G4Tubs            * ru_sipmt_sens_s = new G4Tubs ("ru_sipmt_sens_s", 0., sipmt_sens_radius , (0.5 * sipm_thickness)/2., 0*deg, 360*deg) ;
-  G4LogicalVolume   * ru_sipmt_sens_l = new G4LogicalVolume (ru_sipmt_sens_s, polystyrene, "Horizontal RU Sensitive SiPMT") ;
+  G4LogicalVolume   * ru_sipmt_sens_l = new G4LogicalVolume (ru_sipmt_sens_s, polystyrene, "RU Sensitive SiPMT") ;
   G4VPhysicalVolume * ru_sipmt_sens_p = new G4PVPlacement (0, G4ThreeVector (0.,0.,-0.5 * sipm_thickness + (0.5 * sipm_thickness)/2.), ru_sipmt_sens_l, "SiPMTsens", ru_sipmt_l, false, 0, fCheckOverlaps) ;    
   //PG                                                    pRot,   t(rans)late,                                                           pCurrentLogical, pName,    pMotherLogical, pMany, pCopyNo,  pSurfChk
 

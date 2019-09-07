@@ -117,7 +117,8 @@ void MUON_RunAction::BeginOfRunAction (const G4Run* a_run)
     G4cout << "RunAction :: Init Ntuples" << G4endl ;
     global_ntuples_ptr = new MUON_OutputNtuples ("op_hits",  "Optical Photon Hits"          , int (1e6),
                                                  "mc_truth", "Electromagnetic Interactions" , int (1e3)) ; 
-    
+    global_ntuples_light_ptr = new MUON_OutputNtuplesLight ("events", 20) ; 
+    //FIXME get the number of SiPM somehow!
     out_filename = "MUON_output_" ;
     out_filename += current_time ;
     out_filename += run_name ;
