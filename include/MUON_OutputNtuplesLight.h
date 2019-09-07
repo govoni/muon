@@ -19,10 +19,12 @@ class MUON_OutputNtuplesLight
         void reset () ;
         void store_event () ;
         inline void fill_bullet (float x, float y, float z, float E, float PID) 
-          {m_bullet_x = x ; m_bullet_y = y ; m_bullet_y = z ; m_bullet_E = E ; m_bullet_PID = PID ;}
+          {m_bullet_x = x ; m_bullet_y = y ; m_bullet_y = z ; m_bullet_E = E ; m_bullet_PID = PID ; }
         inline void fill_SiPM (unsigned int ID, float E)
-          {m_SiPM_energies.at (ID) = E ;}
-        std::string getName () { return m_name ; } ;
+          {m_SiPM_energies.at (ID) = E ; }
+        inline void update_bullet_lostE (float deltaE)
+          {m_bullet_lostE += deltaE ; }  
+        std::string getName () { return m_name ; }
 
         TTree m_events ;
 
@@ -32,11 +34,12 @@ class MUON_OutputNtuplesLight
         std::string m_name ;
 
         /// input particle MC info
-        float  m_bullet_x ;   
-        float  m_bullet_y ;
-        float  m_bullet_z ;
-        float  m_bullet_E ;
-        float  m_bullet_PID ;
+        float m_bullet_x ;   
+        float m_bullet_y ;
+        float m_bullet_z ;
+        float m_bullet_E ;
+        float m_bullet_PID ;
+        float m_bullet_lostE ;
 
         /// SiPMs
         std::vector<float> m_SiPM_energies ;

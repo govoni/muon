@@ -10,6 +10,7 @@ MUON_OutputNtuplesLight::MUON_OutputNtuplesLight (const char * name, int SiPM_nu
     m_bullet_y (0.), 
     m_bullet_z (0.), 
     m_bullet_E (-1.), 
+    m_bullet_lostE (-1.), 
     m_bullet_PID (-1.), 
     m_SiPM_energies (SiPM_number, 0),
     m_events (name, name)
@@ -37,11 +38,12 @@ MUON_OutputNtuplesLight::write ()
 void
 MUON_OutputNtuplesLight::set_branches ()
 {
-  m_events.Branch ("bullet_x     " , &m_bullet_x     , "bullet_x/F") ;
-  m_events.Branch ("bullet_y     " , &m_bullet_y     , "bullet_y/F") ;
-  m_events.Branch ("bullet_z     " , &m_bullet_z     , "bullet_z/F") ;
-  m_events.Branch ("bullet_E     " , &m_bullet_E     , "bullet_E/F") ;
-  m_events.Branch ("bullet_PID   " , &m_bullet_PID   , "bullet_PID/F") ;
+  m_events.Branch ("bullet_x"      , &m_bullet_x     , "bullet_x/F") ;
+  m_events.Branch ("bullet_y"      , &m_bullet_y     , "bullet_y/F") ;
+  m_events.Branch ("bullet_z"      , &m_bullet_z     , "bullet_z/F") ;
+  m_events.Branch ("bullet_E"      , &m_bullet_E     , "bullet_E/F") ;
+  m_events.Branch ("bullet_lostE"  , &m_bullet_lostE , "bullet_lostE/F") ;
+  m_events.Branch ("bullet_PID"    , &m_bullet_PID   , "bullet_PID/F") ;
   m_events.Branch ("SiPM_energies" , &m_SiPM_energies) ;
 }
 
@@ -56,6 +58,7 @@ MUON_OutputNtuplesLight::reset ()
   m_bullet_y      = 0. ;
   m_bullet_z      = 0. ;
   m_bullet_E      = -1. ;
+  m_bullet_lostE  = 0. ;
   m_bullet_PID    = -1. ;
   std::fill (m_SiPM_energies.begin (), m_SiPM_energies.end (), 0.) ;
   return ;

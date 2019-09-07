@@ -110,6 +110,7 @@ https://github.com/govoni/FibresCalo/blob/master/src/SteppingAction.cc
   //PG working here to put stuff in
   //PG ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- 
   
+/*
   G4VSensitiveDetector * thisSD = thePostPoint->GetSensitiveDetector () ;
   G4int sd_type = -9 ; 
   if (thisSD)
@@ -121,26 +122,33 @@ https://github.com/govoni/FibresCalo/blob/master/src/SteppingAction.cc
 //      cout << "no sensitive volume crossed " << thePrePVname << endl ;
       return ;
     }  
-
+*/
   // nella stragrande maggioranza degli eventi, nessun SiPM si accende, 
   // sparando positroni su un lato del detector
   // - TODO test con il coso online provando a spararne uno dal centro, per vedere che sia OK la posizione 
   // - TODO aggiungi un altro if con una fibra, qui sotto  
 
   //the crossed volume is a SiPM
-  if (thePrePVname.contains ("SiPMT"))
+  if (thePrePVname.contains ("SiPM"))
     {
-      cout << "[MUON_SteppingAction][UserSteppingAction] SiPM " << sd_type << endl ;
+//      cout << "[MUON_SteppingAction][UserSteppingAction] SiPM " << sd_type << endl ;
       cout << "[MUON_SteppingAction][UserSteppingAction] SiPM number: " << thePrePV->GetCopyNo () << endl ;
       G4double energy = theStep->GetTotalEnergyDeposit () ; 
         //- theStep->GetNonIonizingEnergyDeposit () ;
   
     } //the crossed volume is a SiPM
   
+//  cout << "DEBUG[MUON_SteppingAction][UserSteppingAction] track " << theTrack->GetTrackID () << endl ;
+
   /// track energy loss by primary particle
   if (theTrack->GetTrackID () == 1)
     {
-      G4double energy = theStep->GetTotalEnergyDeposit () ; 
+//      cout << "DEBUG[MUON_SteppingAction][UserSteppingAction] in volume " << thePrePVname << endl ;
+
+      G4double lostEnergy = theStep->GetTotalEnergyDeposit () ; 
+//      cout << "DEBUG[MUON_SteppingAction][UserSteppingAction] energy deposit " << lostEnergy << endl ;
+
+      global_ntuples_light_ptr->update_bullet_lostE (lostEnergy) ;
       /* still not clear to me how to know the energy a single particle lost in a step.
         - there is the energy lost to the material (GetTotalEnergyDeposit)
         - there is the energy lost to secondary particles (how do I calculate it?)
