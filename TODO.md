@@ -48,7 +48,8 @@
 
 ## primary particle information
 
-  * how can I get its initial position and energy?
   * how can I determine the total energy loss of a particle, after it exits the detector?
-
+  * the total energy loss that I see in the ntuples created by the executable
+    seems somehow independent of the size of the detector I put in the shoot_positron.mac file,
+    which is strange
  
