@@ -145,16 +145,12 @@ https://github.com/govoni/FibresCalo/blob/master/src/SteppingAction.cc
     {
 //      cout << "DEBUG[MUON_SteppingAction][UserSteppingAction] in volume " << thePrePVname << endl ;
 
-      G4double lostEnergy = theStep->GetTotalEnergyDeposit () ; 
+      G4double lostEnergy = theStep->GetTotalEnergyDeposit () / GeV ; 
 //      cout << "DEBUG[MUON_SteppingAction][UserSteppingAction] energy deposit " << lostEnergy << endl ;
 
       global_ntuples_light_ptr->update_bullet_lostE (lostEnergy) ;
-      /* still not clear to me how to know the energy a single particle lost in a step.
-        - there is the energy lost to the material (GetTotalEnergyDeposit)
-        - there is the energy lost to secondary particles (how do I calculate it?)
-       http://hypernews.slac.stanford.edu/HyperNews/geant4/get/eventtrackmanage/1043/1/1.html
-       http://hypernews.slac.stanford.edu/HyperNews/geant4/get/eventtrackmanage/1287/1.html
-      */
+      global_ntuples_light_ptr->set_bullet_lastZ (thePostPoint->GetPosition ().z ()) ;
+      global_ntuples_light_ptr->set_bullet_lastE (theTrack->GetDynamicParticle ()->GetTotalEnergy () / GeV) ;
     }
 
 

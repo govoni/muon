@@ -117,7 +117,6 @@ MUON_DetectorMessenger::MUON_DetectorMessenger( MUON_DetectorConstruction *det )
 
 MUON_DetectorMessenger::~MUON_DetectorMessenger()
 {
-    cout << "DEBUG[MUON_DetectorMessenger][dtor]" << endl ;
     G4cout << ":~MUON_DetectorMessenger()" << G4endl ;
 
     delete ofos_directory_                       ;
@@ -147,9 +146,6 @@ MUON_DetectorMessenger::~MUON_DetectorMessenger()
 
 void MUON_DetectorMessenger::SetNewValue (G4UIcommand * command, G4String newValue)
 {
-  cout << "DEBUG[MUON_DetectorMessenger][SetNewValue]" << endl ;
-  cout << "DEBUG[MUON_DetectorMessenger][SetNewValue] " << newValue << endl ;
-
   if( command == absorption_length_cmd_ )
       { det_->set_ls_dummy_absorption(absorption_length_cmd_->GetNewDoubleValue(newValue));}
   

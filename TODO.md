@@ -17,6 +17,9 @@
       * the (x,y) coordinate of the MCtruth particles 
       * the signal at the SiPM, for each event
   * what is ComputeCriticalEnergy?    
+  * how do I get a more useful visualisation?
+    * quicker
+    * with less particles (energy threshold?)
 
 
 ## on the detector info extraction
@@ -51,5 +54,11 @@
   * how can I determine the total energy loss of a particle, after it exits the detector?
   * the total energy loss that I see in the ntuples created by the executable
     seems somehow independent of the size of the detector I put in the shoot_positron.mac file,
-    which is strange
- 
+    which is strange... but if the secondaries energy is not accounted for?
+    * still not clear to me how to know the energy a single particle lost in a step.
+      * there is the energy lost to the material (GetTotalEnergyDeposit)
+      * there is the energy lost to secondary particles (how do I calculate it?)
+      * http://hypernews.slac.stanford.edu/HyperNews/geant4/get/eventtrackmanage/1043/1/1.html
+      * http://hypernews.slac.stanford.edu/HyperNews/geant4/get/eventtrackmanage/1287/1.html
+    * ask the particle what's its energy and saving the last value, 
+      to then evaluate the lost energy as a difference
