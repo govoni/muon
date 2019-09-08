@@ -129,11 +129,21 @@ https://github.com/govoni/FibresCalo/blob/master/src/SteppingAction.cc
   // - TODO aggiungi un altro if con una fibra, qui sotto  
 
   //the crossed volume is a SiPM
-  if (thePrePVname.contains ("SiPM"))
+//  if (thePrePVname.contains ("SiPM"))
+  if (thePrePVname == "SiPMT")
     {
 //      cout << "[MUON_SteppingAction][UserSteppingAction] SiPM " << sd_type << endl ;
       cout << "[MUON_SteppingAction][UserSteppingAction] SiPM number: " << thePrePV->GetCopyNo () << endl ;
-      G4double energy = theStep->GetTotalEnergyDeposit () ; 
+      G4double energy = theStep->GetTotalEnergyDeposit () ;
+      cout << "[MUON_SteppingAction][UserSteppingAction] touchable Rep 0: " << thePrePoint->GetTouchable ()->GetReplicaNumber (0) << endl ;
+//      cout << "[MUON_SteppingAction][UserSteppingAction] touchable Rep 1: " << thePrePoint->GetTouchable ()->GetReplicaNumber (1) << endl ;
+      cout << "[MUON_SteppingAction][UserSteppingAction] touchable Rep 2: " << thePrePoint->GetTouchable ()->GetReplicaNumber (2) << endl ;
+//      cout << "[MUON_SteppingAction][UserSteppingAction] touchable Rep 3: " << thePrePoint->GetTouchable ()->GetReplicaNumber (3) << endl ;
+//      cout << "[MUON_SteppingAction][UserSteppingAction] touchable Rep 4: " << thePrePoint->GetTouchable ()->GetReplicaNumber (4) << endl ;
+      cout << "[MUON_SteppingAction][UserSteppingAction] touchable max depth: " << thePrePoint->GetTouchable ()->GetHistoryDepth () << endl ;
+
+//      cout << "[MUON_SteppingAction][UserSteppingAction] touchable Cop 0: " << thePrePoint->GetTouchable ()->GetCopyNumber (1) << endl ;
+//      cout << "[MUON_SteppingAction][UserSteppingAction] touchable Cop 1: " << thePrePoint->GetTouchable ()->GetCopyNumber (3) << endl ;
         //- theStep->GetNonIonizingEnergyDeposit () ;
   
     } //the crossed volume is a SiPM

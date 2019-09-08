@@ -615,10 +615,10 @@ MUON_DetectorConstruction::build_geom ()
   G4VPhysicalVolume* fiber_outer_cladding_p = new G4PVPlacement (0, G4ThreeVector (), fiber_outer_cladding_l, "OuterCladding", fiber_env_l, false, 0, fCheckOverlaps) ;
   G4VPhysicalVolume* fiber_inner_cladding_p = new G4PVPlacement (0, G4ThreeVector (), fiber_inner_cladding_l, "InnerCladding", fiber_outer_cladding_l, false, 0, fCheckOverlaps) ;
   G4VPhysicalVolume* fiber_core_p           = new G4PVPlacement (0, G4ThreeVector (), fiber_core_l, "FiberCore", fiber_inner_cladding_l, false, 0, fCheckOverlaps) ;
-  G4VPhysicalVolume* ru_sipmt_top_p         = new G4PVPlacement (0, G4ThreeVector (0.,0.,0.5 * fiber_env_length - 0.5 * sipm_thickness), ru_sipmt_l, "SiPMT", fiber_env_l, false, 0, fCheckOverlaps) ;
+  G4VPhysicalVolume* ru_sipmt_top_p         = new G4PVPlacement (0, G4ThreeVector (0.,0.,0.5 * fiber_env_length - 0.5 * sipm_thickness), ru_sipmt_l, "SiPMTsens", fiber_env_l, false, 0, fCheckOverlaps) ;
   
   G4RotationMatrix rot_sipmt ;
-                   rot_sipmt.rotateX (180.*deg) ; 
+  rot_sipmt.rotateX (180.*deg) ; 
   
   G4VPhysicalVolume* ru_sipmt_bot_p = new G4PVPlacement (G4Transform3D (rot_sipmt, G4ThreeVector (0.,0.,-0.5 * fiber_env_length + 0.5 * sipm_thickness)), ru_sipmt_l, "SiPMT", fiber_env_l, false, 1, fCheckOverlaps) ;
 

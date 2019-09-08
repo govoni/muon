@@ -19,7 +19,7 @@ class MUON_OutputNtuplesLight
         void reset () ;
         void store_event () ;
         inline void fill_bullet (float x, float y, float z, float E, float PID) 
-          {m_bullet_x = x ; m_bullet_y = y ; m_bullet_y = z ; m_bullet_E = E ; m_bullet_PID = PID ; }
+          {m_bullet_x = x ; m_bullet_y = y ; m_bullet_z = z ; m_bullet_E = E ; m_bullet_PID = PID ; }
         inline void fill_SiPM (unsigned int ID, float E)
           {m_SiPM_energies.at (ID) = E ; }
         inline void update_bullet_lostE (float deltaE)

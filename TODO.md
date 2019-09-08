@@ -47,18 +47,26 @@
       * for optical photons
       * for other particles  
   * come determino il numero di identificazione di ogni SiPM?
+    * stranamente con una particle gun centrale, si accendono SiPM 0 ed 1, mi sarei aspettato circa a meta'
+      * sto usando thePrePV->GetCopyNo () per determinare il numero di ID del SiPM
+      * seems that the solution is in the Touchables, investigating...
+        * bisogna andare in profondita' con GetReplicaNumber, sembra 0 (SiPM) e 2 (fibre).
+        * controllare se funziona anche con GetCopyNb
   * l'efficienza di rivelazione del SiPM e' codificata?
+  * change SiPMT into SiPM
 
-## primary particle information
+## primary particle shooting and information
 
+  * how do I generate a flat distribution in x, y of the particles to the detector?
   * how can I determine the total energy loss of a particle, after it exits the detector?
-  * the total energy loss that I see in the ntuples created by the executable
-    seems somehow independent of the size of the detector I put in the shoot_positron.mac file,
-    which is strange... but if the secondaries energy is not accounted for?
-    * still not clear to me how to know the energy a single particle lost in a step.
-      * there is the energy lost to the material (GetTotalEnergyDeposit)
-      * there is the energy lost to secondary particles (how do I calculate it?)
-      * http://hypernews.slac.stanford.edu/HyperNews/geant4/get/eventtrackmanage/1043/1/1.html
-      * http://hypernews.slac.stanford.edu/HyperNews/geant4/get/eventtrackmanage/1287/1.html
-    * ask the particle what's its energy and saving the last value, 
-      to then evaluate the lost energy as a difference
+    * the total energy loss that I see in the ntuples created by the executable
+      seems somehow independent of the size of the detector I put in the shoot_positron.mac file,
+      which is strange... but if the secondaries energy is not accounted for?
+      * still not clear to me how to know the energy a single particle lost in a step.
+        * there is the energy lost to the material (GetTotalEnergyDeposit)
+        * there is the energy lost to secondary particles (how do I calculate it?)
+        * http://hypernews.slac.stanford.edu/HyperNews/geant4/get/eventtrackmanage/1043/1/1.html
+        * http://hypernews.slac.stanford.edu/HyperNews/geant4/get/eventtrackmanage/1287/1.html
+      * ask the particle what's its energy and saving the last value, 
+        to then evaluate the lost energy as a difference
+
