@@ -7,9 +7,6 @@
 /MUON/geom/ls_depth 50 cm
 /MUON/detector/build
 
-
-#/MUON/detector/build
-
 # Use these open statements to open selected visualization
 #
 # Use this open statement to create an OpenGL view:
@@ -52,33 +49,51 @@
 # Draw coordinate axes:
 #/vis/scene/add/axes 0 0 0 1 m
 #
+
+# To draw only gammas:
+/vis/filtering/trajectories/create/particleFilter
+/vis/filtering/trajectories/particleFilter-0/add gamma
+#
+# To invert the above, drawing all particles except gammas,
+# keep the above two lines but also add:
+/vis/filtering/trajectories/particleFilter-0/invert true
+/vis/filtering/trajectories/particleFilter-0/active true
+/vis/filtering/trajectories/create/chargeFilter
+/vis/filtering/trajectories/chargeFilter-0/add 0
+/vis/filtering/trajectories/chargeFilter-0/invert true
+/vis/filtering/trajectories/chargeFilter-0/active true
+
+
+
 # Draw smooth trajectories at end of event, showing trajectory points
 # as markers 2 pixels wide:
 /vis/scene/add/trajectories smooth
 /vis/modeling/trajectories/create/drawByCharge
-/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+#/vis/modeling/trajectories/drawByCharge-0/set 0 white
+/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts false
 /vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+#/vis/modeling/trajectories/drawByCharge-0/default/setLineColour red
 # (if too many tracks cause core dump => /tracking/storeTrajectory 0)
 #
 # Draw hits at end of event:
 /vis/scene/add/hits
-#
-# To draw only gammas:
-#/vis/filtering/trajectories/create/particleFilter
-#/vis/filtering/trajectories/particleFilter-0/add gamma
-#
-# To invert the above, drawing all particles except gammas,
-# keep the above two lines but also add:
-#/vis/filtering/trajectories/particleFilter-0/invert true
-#
+#/vis/filtering/hits/create/particleFilter
+#/vis/filtering/hits/particleFilter-1/add gamma
+#/vis/filtering/hits/particleFilter-1/invert true
+
 # Many other options are available with /vis/modeling and /vis/filtering.
 # For example, to select colour by particle ID:
-#/vis/modeling/trajectories/create/drawByParticleID
-#/vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts true
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts true
 # To select or override default colours (note: e+ is blue by default):
-#/vis/modeling/trajectories/list
+/vis/modeling/trajectories/list
 #/vis/modeling/trajectories/drawByParticleID-0/set e+ yellow
+/vis/modeling/trajectories/drawByParticleID-0/set e+ green
+/vis/modeling/trajectories/drawByParticleID-0/set e- green
+/vis/modeling/trajectories/drawByParticleID-0/set gamma blue
 #
+/vis/modeling/trajectories/select drawByCharge-0
+
 # To superimpose all of the events from a given run:
 /vis/scene/endOfEventAction accumulate
 #
@@ -91,4 +106,4 @@
 
 
 
-# /vis/viewer/set/background white
+#/vis/viewer/set/background white

@@ -97,6 +97,6 @@
 # run the generation of events with N particles (true?)
 # ---- ---- ---- ---- ---- ---- ---- ---- ---- 
 
-# /run/beamOn 10
+/run/beamOn 10
 
 
